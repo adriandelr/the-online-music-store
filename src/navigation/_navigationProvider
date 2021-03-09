@@ -1,0 +1,87 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import Route from "../navigation/_Route";
+import Home from "../screens/home";
+import Albums from "../screens/albums";
+
+export const NavigationContext = React.createContext({
+  pathname: window.location.pathname,
+  navigate: (pathname: string) => {},
+});
+
+// export interface NavigationProviderProps {
+//     navigate: any;
+// }
+
+// export interface NavigationProviderState {
+//   pathname: string;
+//   navigate: any;
+// }
+
+// class NavigationProvider extends React.Component<
+//   NavigationProviderProps,
+//   NavigationProviderState
+// > {
+class NavigationProvider extends React.Component {
+  constructor(props: any) {
+    super(props);
+
+    window.onpopstate = () => {
+      this.setState({
+        pathname: window.location.pathname,
+      });
+    };
+  }
+
+  navigate = (pathname: string) => {
+    console.log(pathname);
+    this.setState({ pathname });
+    window.history.pushState(null, "", pathname);
+    // const element = <h1>Hello World</h1>;
+    // ReactDOM.render(element, document.getElementById("route"));
+    this.forceUpdate();
+  };
+
+  state: any = {
+    pathname: window.location.pathname,
+    navigate: this.navigate,
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <NavigationContext.Provider value={this.state}>
+          {this.props.children}
+          <NavigationContext.Consumer>
+            {({ navigate }) => (
+              <nav>
+                <button
+                  onClick={() => {
+                    navigate("/Home");
+                  }}
+                >
+                  Home
+                </button>
+                <button
+                  onClick={() => {
+                    navigate("/Albums");
+                  }}
+                >
+                  Albums
+                </button>
+              </nav>
+            )}
+          </NavigationContext.Consumer>
+        </NavigationContext.Provider>
+        <Route href="/Home">
+          <Home albums={[]} />
+        </Route>
+        <Route href="/Albums">
+          <Albums />
+        </Route>
+      </React.Fragment>
+    );
+  }
+}
+
+export default NavigationProvider;
