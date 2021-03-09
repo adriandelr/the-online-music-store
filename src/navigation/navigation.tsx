@@ -109,6 +109,9 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
           <Route exact path="/home">
             <HomeScreen albums={albums} isTopTen={true} showButtons={false} />
           </Route>
+          <Route exact path="/the-online-music-store">
+            <Redirect exact from="/the-online-music-store" to="/home" />
+          </Route>
           <Route exact path="/">
             <Redirect exact from="/" to="/home" />
           </Route>
