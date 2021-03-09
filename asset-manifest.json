@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/the-online-music-store/static/css/main.b280b965.chunk.css",
-    "main.js": "/the-online-music-store/static/js/main.3dea9653.chunk.js",
-    "main.js.map": "/the-online-music-store/static/js/main.3dea9653.chunk.js.map",
+    "main.js": "/the-online-music-store/static/js/main.32f95613.chunk.js",
+    "main.js.map": "/the-online-music-store/static/js/main.32f95613.chunk.js.map",
     "runtime-main.js": "/the-online-music-store/static/js/runtime-main.2343b38c.js",
     "runtime-main.js.map": "/the-online-music-store/static/js/runtime-main.2343b38c.js.map",
     "static/css/2.fabbef47.chunk.css": "/the-online-music-store/static/css/2.fabbef47.chunk.css",
-    "static/js/2.93b3bc17.chunk.js": "/the-online-music-store/static/js/2.93b3bc17.chunk.js",
-    "static/js/2.93b3bc17.chunk.js.map": "/the-online-music-store/static/js/2.93b3bc17.chunk.js.map",
+    "static/js/2.a65d8ae9.chunk.js": "/the-online-music-store/static/js/2.a65d8ae9.chunk.js",
+    "static/js/2.a65d8ae9.chunk.js.map": "/the-online-music-store/static/js/2.a65d8ae9.chunk.js.map",
     "static/js/3.fae45dc7.chunk.js": "/the-online-music-store/static/js/3.fae45dc7.chunk.js",
     "static/js/3.fae45dc7.chunk.js.map": "/the-online-music-store/static/js/3.fae45dc7.chunk.js.map",
     "index.html": "/the-online-music-store/index.html",
     "static/css/2.fabbef47.chunk.css.map": "/the-online-music-store/static/css/2.fabbef47.chunk.css.map",
     "static/css/main.b280b965.chunk.css.map": "/the-online-music-store/static/css/main.b280b965.chunk.css.map",
-    "static/js/2.93b3bc17.chunk.js.LICENSE.txt": "/the-online-music-store/static/js/2.93b3bc17.chunk.js.LICENSE.txt"
+    "static/js/2.a65d8ae9.chunk.js.LICENSE.txt": "/the-online-music-store/static/js/2.a65d8ae9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2343b38c.js",
     "static/css/2.fabbef47.chunk.css",
-    "static/js/2.93b3bc17.chunk.js",
+    "static/js/2.a65d8ae9.chunk.js",
     "static/css/main.b280b965.chunk.css",
-    "static/js/main.3dea9653.chunk.js"
+    "static/js/main.32f95613.chunk.js"
   ]
 }
