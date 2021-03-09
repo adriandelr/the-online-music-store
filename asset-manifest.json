@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/the-online-music-store/static/css/main.b280b965.chunk.css",
-    "main.js": "/the-online-music-store/static/js/main.dad7dbb5.chunk.js",
-    "main.js.map": "/the-online-music-store/static/js/main.dad7dbb5.chunk.js.map",
+    "main.js": "/the-online-music-store/static/js/main.3dea9653.chunk.js",
+    "main.js.map": "/the-online-music-store/static/js/main.3dea9653.chunk.js.map",
     "runtime-main.js": "/the-online-music-store/static/js/runtime-main.2343b38c.js",
     "runtime-main.js.map": "/the-online-music-store/static/js/runtime-main.2343b38c.js.map",
     "static/css/2.fabbef47.chunk.css": "/the-online-music-store/static/css/2.fabbef47.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.fabbef47.chunk.css",
     "static/js/2.93b3bc17.chunk.js",
     "static/css/main.b280b965.chunk.css",
-    "static/js/main.dad7dbb5.chunk.js"
+    "static/js/main.3dea9653.chunk.js"
   ]
 }
