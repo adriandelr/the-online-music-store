@@ -29,7 +29,7 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
       <Router>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <NavLink
-            to="/"
+            to="/the-online-music-store"
             className="navbar-brand nav-item nav-link text-decoration-none"
           >
             The Online Music Store
@@ -48,28 +48,28 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <NavLink
-                to="/home"
+                to="/the-online-music-store/home"
                 activeClassName="text-info"
                 className="nav-item nav-link text-decoration-none"
               >
                 Home <span className="sr-only">(current)</span>
               </NavLink>
               <NavLink
-                to="/albums"
+                to="/the-online-music-store/albums"
                 activeClassName="text-info"
                 className="nav-item nav-link text-decoration-none"
               >
                 Albums
               </NavLink>
               <NavLink
-                to="/purchase"
+                to="/the-online-music-store/purchase"
                 activeClassName="text-info"
                 className="nav-item nav-link text-decoration-none"
               >
                 Purchase
               </NavLink>
               <NavLink
-                to="/cart"
+                to="/the-online-music-store/cart"
                 activeClassName="text-info"
                 className="nav-item nav-link text-decoration-none"
               >
@@ -97,23 +97,27 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
           </div>
         </nav>
         <Switch>
-          <Route path="/cart">
+          <Route exact path="/the-online-music-store/cart">
             <CartScreen albums={albums} />
           </Route>
-          <Route path="/purchase">
+          <Route exact path="/the-online-music-store/purchase">
             <PurchaseScreen albums={albums} />
           </Route>
-          <Route path="/albums">
+          <Route exact path="/the-online-music-store/albums">
             <AlbumsScreen albums={albums} isTopTen={false} showButtons={true} />
           </Route>
-          <Route exact path="/home">
+          <Route exact path="/the-online-music-store/home">
             <HomeScreen albums={albums} isTopTen={true} showButtons={false} />
           </Route>
           <Route exact path="/the-online-music-store">
-            <Redirect exact from="/the-online-music-store" to="/home" />
+            <Redirect
+              exact
+              from="/the-online-music-store"
+              to="/the-online-music-store/home"
+            />
           </Route>
           <Route exact path="/">
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/the-online-music-store/" />
           </Route>
         </Switch>
       </Router>
