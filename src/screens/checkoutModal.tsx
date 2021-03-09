@@ -75,7 +75,7 @@ const CheckoutModal: React.SFC<CheckoutModalProps> = (props) => {
               onClick={() => {
                 purchaseAlbums();
                 closeModal();
-                history.push("/purchase");
+                history.push("/the-online-music-store/purchase");
               }}
             >
               Place Order
