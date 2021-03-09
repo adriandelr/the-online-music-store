@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 import {
   BrowserRouter as Router,
-  Switch,
+  HashRouter,
   Route,
   NavLink,
   Redirect,
@@ -26,7 +26,7 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
   render() {
     const { albums } = this.props;
     return (
-      <Router>
+      <HashRouter>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <NavLink
             to="/the-online-music-store"
@@ -96,31 +96,29 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
             </div>
           </div>
         </nav>
-        <Switch>
-          <Route exact path="/the-online-music-store/cart">
-            <CartScreen albums={albums} />
-          </Route>
-          <Route exact path="/the-online-music-store/purchase">
-            <PurchaseScreen albums={albums} />
-          </Route>
-          <Route exact path="/the-online-music-store/albums">
-            <AlbumsScreen albums={albums} isTopTen={false} showButtons={true} />
-          </Route>
-          <Route exact path="/the-online-music-store/home">
-            <HomeScreen albums={albums} isTopTen={true} showButtons={false} />
-          </Route>
-          <Route exact path="/the-online-music-store">
-            <Redirect
-              exact
-              from="/the-online-music-store"
-              to="/the-online-music-store/home"
-            />
-          </Route>
-          <Route exact path="/">
-            <Redirect exact from="/" to="/the-online-music-store/" />
-          </Route>
-        </Switch>
-      </Router>
+        <Route exact path="/the-online-music-store/cart">
+          <CartScreen albums={albums} />
+        </Route>
+        <Route exact path="/the-online-music-store/purchase">
+          <PurchaseScreen albums={albums} />
+        </Route>
+        <Route exact path="/the-online-music-store/albums">
+          <AlbumsScreen albums={albums} isTopTen={false} showButtons={true} />
+        </Route>
+        <Route exact path="/the-online-music-store/home">
+          <HomeScreen albums={albums} isTopTen={true} showButtons={false} />
+        </Route>
+        <Route exact path="/the-online-music-store">
+          <Redirect
+            exact
+            from="/the-online-music-store"
+            to="/the-online-music-store/home"
+          />
+        </Route>
+        <Route exact path="/">
+          <Redirect exact from="/" to="/the-online-music-store/" />
+        </Route>
+      </HashRouter>
     );
   }
 }
