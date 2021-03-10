@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navigation from "./navigation/navigation";
+import Nav from "./navigation/nav";
 import "./constants/App.css";
 import _ from "lodash";
 
@@ -16,9 +16,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
-      {!_.isEmpty(albums) && <Navigation albums={albums} />}
-    </div>
+    <div className="App">{!_.isEmpty(albums) && <Nav albums={albums} />}</div>
   );
 };
 

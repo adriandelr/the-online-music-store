@@ -15,13 +15,13 @@ import CartScreen from "../screens/cartScreen";
 
 import { initAlbums } from "../firebase/albumService";
 
-export interface NavigationProps {
+export interface NavProps {
   albums: any;
 }
 
-export interface NavigationState {}
+export interface NavState {}
 
-class Navigation extends React.Component<NavigationProps, NavigationState> {
+class Nav extends React.Component<NavProps, NavState> {
   state = { addedToCartAlbums: [], totalCartItems: 0, totalCartPrice: 0 };
   albums = this.props.albums;
 
@@ -94,7 +94,10 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
                 activeClassName="text-info"
                 className="nav-item nav-link text-decoration-none"
               >
-                Cart ({this.state.totalCartItems})
+                Cart
+                <span className="badge badge-pill badge-dark ml-1">
+                  {this.state.totalCartItems}
+                </span>
               </NavLink>
               <a
                 className="reset-btn nav-item nav-link text-decoration-none text-muted position-absolute mr-5"
@@ -153,4 +156,4 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
   }
 }
 
-export default Navigation;
+export default Nav;
