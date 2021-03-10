@@ -9,8 +9,8 @@ The Online Music Store is a site where you can play, listen, and purchase top se
 This exercise showcases ReactJS features
 
 - Firebase/Firestore
+- Globalization/Scoping
 - Routing
-- Globalization
 - Data-DOM Manipulation
 - E-Commerce
 - Bootstrap
@@ -28,6 +28,16 @@ This exercise showcases ReactJS features
 - Sweetalert
 
 ## Usage
+
+### Firestore
+
+You can clear or randomize store data.
+
+The `/constants/albumsData` contains JSON data that is added to the database.
+
+The `/firebase/albumService` contains requests to add, update, and delete data records.
+
+### Website
 
 - Home
   - View List of Top 10 Best Selling Albums
@@ -59,4 +69,4 @@ This exercise showcases ReactJS features
 
 ## Installation
 
-`npm install` to install packages, then `npm start` to run on a local web server.
+To run locally, use `npm install` to install packages, then `npm start` to run on your local web server.
