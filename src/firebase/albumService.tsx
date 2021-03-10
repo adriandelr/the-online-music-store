@@ -17,7 +17,7 @@ const addAlbums = (isRandomData?: boolean) => {
     album.songs.forEach((song: any, sIndex: number) => {
       song["songId"] = sIndex + 1;
       song["albumId"] = aIndex + 1;
-      if (isRandomData) song["playCount"] = _.random(7, 777);
+      if (isRandomData) song["playCount"] = _.random(3, 333);
     });
     query
       .doc(album.albumId)
