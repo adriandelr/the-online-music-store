@@ -1,5 +1,5 @@
 import React from "react";
-import _ from "lodash";
+import _, { update } from "lodash";
 import {
   BrowserRouter as Router,
   HashRouter,
@@ -22,7 +22,28 @@ export interface NavigationProps {
 export interface NavigationState {}
 
 class Navigation extends React.Component<NavigationProps, NavigationState> {
-  // state = { : }
+  state = { addedToCartAlbums: [], totalCartItems: 0, totalCartPrice: 0 };
+  albums = this.props.albums;
+
+  componentDidMount() {
+    this.updateCartData();
+  }
+
+  updateCartData = () => {
+    let addedToCartAlbums = _.filter(
+      this.albums,
+      (album) => album.onCartCount > 0
+    );
+    _.forEach(addedToCartAlbums, (album) => {
+      album["totalPrice"] = album.onCartCount * album.albumPrice;
+    });
+    this.setState({
+      addedToCartAlbums: addedToCartAlbums,
+      totalCartItems: _.sumBy(addedToCartAlbums, "onCartCount"),
+      totalCartPrice: _.sumBy(addedToCartAlbums, "totalPrice"),
+    });
+  };
+
   render() {
     const { albums } = this.props;
     return (
@@ -73,7 +94,7 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
                 activeClassName="text-info"
                 className="nav-item nav-link text-decoration-none"
               >
-                Cart
+                Cart ({this.state.totalCartItems})
               </NavLink>
               <a
                 className="reset-btn nav-item nav-link text-decoration-none text-muted position-absolute mr-5"
@@ -97,13 +118,22 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
           </div>
         </nav>
         <Route exact path="/the-online-music-store/cart">
-          <CartScreen albums={albums} />
+          <CartScreen
+            cartData={this.state}
+            updateCartData={this.updateCartData}
+            albums={albums}
+          />
         </Route>
         <Route exact path="/the-online-music-store/purchase">
           <PurchaseScreen albums={albums} />
         </Route>
         <Route exact path="/the-online-music-store/albums">
-          <AlbumsScreen albums={albums} isTopTen={false} showButtons={true} />
+          <AlbumsScreen
+            albums={albums}
+            isTopTen={false}
+            showButtons={true}
+            updateCartData={this.updateCartData}
+          />
         </Route>
         <Route exact path="/the-online-music-store/home">
           <HomeScreen albums={albums} isTopTen={true} showButtons={false} />

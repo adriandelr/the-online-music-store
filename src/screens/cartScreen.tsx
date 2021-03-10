@@ -6,21 +6,14 @@ import CheckoutModal from "./checkoutModal";
 
 export interface CartScreenProps {
   albums: any;
+  cartData: any;
+  updateCartData: any;
 }
 
 const CartScreen: React.SFC<CartScreenProps> = (props) => {
   const [albums, setAlbums] = useState(props.albums);
   const [showModal, setShowModal] = useState(false);
-
-  let addedToCartAlbums = _.filter(albums, (album) => album.onCartCount > 0);
-
-  _.forEach(addedToCartAlbums, (album) => {
-    album["totalPrice"] = album.onCartCount * album.albumPrice;
-  });
-
-  let totalPrice = _.sumBy(addedToCartAlbums, "totalPrice");
-
-  let totalItems = _.sumBy(addedToCartAlbums, "onCartCount");
+  const { cartData, updateCartData } = props;
 
   const closeModal = () => {
     setShowModal(false);
@@ -28,18 +21,16 @@ const CartScreen: React.SFC<CartScreenProps> = (props) => {
 
   return (
     <React.Fragment>
-      {showModal && addedToCartAlbums.length > 0 && (
+      {showModal && cartData.addedToCartAlbums.length > 0 && (
         <CheckoutModal
-          albums={addedToCartAlbums}
-          totalPrice={totalPrice}
+          albums={cartData.addedToCartAlbums}
+          totalPrice={cartData.totalCartPrice}
           closeModal={closeModal}
         />
       )}
       <div className="m-5">
-        <h3 className="text-dark mb-5">
-          My Cart {totalItems > 0 && <span>({totalItems})</span>}
-        </h3>
-        {addedToCartAlbums.length > 0 && (
+        <h3 className="text-dark mb-5">My Cart</h3>
+        {cartData.addedToCartAlbums.length > 0 && (
           <table className="table table-borderless">
             <thead>
               <tr>
@@ -52,7 +43,7 @@ const CartScreen: React.SFC<CartScreenProps> = (props) => {
               </tr>
             </thead>
             <tbody>
-              {addedToCartAlbums.map((album: any, index: number) => (
+              {cartData.addedToCartAlbums.map((album: any, index: number) => (
                 <tr key={album.albumId}>
                   <th scope="row">{index}</th>
                   <td>{album.albumName}</td>
@@ -67,7 +58,8 @@ const CartScreen: React.SFC<CartScreenProps> = (props) => {
                         updateAlbum(0, album, false, "dec").catch(() => {
                           album["onCartCount"] -= 1;
                         });
-                        setAlbums(addedToCartAlbums);
+                        setAlbums(cartData.addedToCartAlbums);
+                        updateCartData();
                       }}
                     >
                       Remove
@@ -83,7 +75,7 @@ const CartScreen: React.SFC<CartScreenProps> = (props) => {
                 <td></td>
                 <td></td>
                 <td className="text-secondary font-weight-bold">
-                  Total (${totalPrice})
+                  Total (${cartData.totalCartPrice})
                 </td>
                 <td>
                   <kbd
@@ -100,7 +92,7 @@ const CartScreen: React.SFC<CartScreenProps> = (props) => {
             </tfoot>
           </table>
         )}
-        {addedToCartAlbums.length < 1 && (
+        {cartData.addedToCartAlbums.length < 1 && (
           <h5 className="text-muted mt-5">No albums added to cart.</h5>
         )}
       </div>

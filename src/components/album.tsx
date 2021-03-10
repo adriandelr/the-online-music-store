@@ -9,6 +9,7 @@ export interface AlbumProps {
   artist: string;
   isTopTen?: boolean;
   showButtons: boolean;
+  updateCartData: any;
 }
 
 export interface AlbumState {}
@@ -16,7 +17,14 @@ export interface AlbumState {}
 class Album extends React.Component<AlbumProps, AlbumState> {
   //   state = { : 0 };
   render() {
-    const { album, song, artist, isTopTen, showButtons } = this.props;
+    const {
+      album,
+      song,
+      artist,
+      isTopTen,
+      showButtons,
+      updateCartData: updateCartData,
+    } = this.props;
 
     return (
       <li
@@ -41,6 +49,7 @@ class Album extends React.Component<AlbumProps, AlbumState> {
                 album["onCartCount"] -= 1;
               });
               this.setState({});
+              updateCartData();
             }}
           >
             {!isTopTen && <FaCartPlus className={`text-dark mr-2`} />}

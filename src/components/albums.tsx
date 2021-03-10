@@ -6,6 +6,7 @@ export interface AlbumsProps {
   albums: any;
   isTopTen: boolean;
   showButtons: boolean;
+  updateCartData?: any;
 }
 
 export interface AlbumsState {}
@@ -13,7 +14,12 @@ export interface AlbumsState {}
 class Albums extends React.Component<AlbumsProps, AlbumsState> {
   // state = { :  }
   render() {
-    const { albums, isTopTen, showButtons } = this.props;
+    const {
+      albums,
+      isTopTen,
+      showButtons,
+      updateCartData: updateCartData,
+    } = this.props;
 
     return (
       <div className="text-left m-5">
@@ -32,6 +38,7 @@ class Albums extends React.Component<AlbumsProps, AlbumsState> {
               song={album.song}
               isTopTen={isTopTen}
               showButtons={showButtons}
+              updateCartData={updateCartData}
             />
           ))}
         </ul>
