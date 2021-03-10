@@ -15,7 +15,7 @@ const HomeScreen: React.SFC<HomeScreenProps> = (props: any) => {
 
   // Process top ten
   let topTenAlbums = [];
-  topTenAlbums = _.take(_.orderBy(albums, ["onCartCount"], ["desc"]), 10);
+  topTenAlbums = _.take(_.orderBy(albums, ["purchasedCount"], ["desc"]), 10);
 
   // Merge songs, flatten, orderByPlaycount, take top 10, and generate virtual indexes
   let topTenSongs: any = [];
