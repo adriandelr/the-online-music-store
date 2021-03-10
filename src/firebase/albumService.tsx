@@ -10,14 +10,14 @@ const addAlbums = (isRandomData?: boolean) => {
   _.forEach(albumData, (album: any, aIndex: number) => {
     album["albumRef"] = db.doc("albumId/" + (aIndex + 1));
     if (isRandomData) {
-      album["onCartCount"] = _.random(15);
-      album["purchasedCount"] = _.random(10);
+      album["onCartCount"] = _.random(7);
+      album["purchasedCount"] = _.random(3);
       album["albumPrice"] = _.random(9, 21);
     }
     album.songs.forEach((song: any, sIndex: number) => {
       song["songId"] = sIndex + 1;
       song["albumId"] = aIndex + 1;
-      if (isRandomData) song["playCount"] = _.random(7, 337);
+      if (isRandomData) song["playCount"] = _.random(3, 333);
     });
     query
       .doc(album.albumId)
