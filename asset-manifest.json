@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/the-online-music-store/static/css/main.45a4f969.chunk.css",
-    "main.js": "/the-online-music-store/static/js/main.60170515.chunk.js",
-    "main.js.map": "/the-online-music-store/static/js/main.60170515.chunk.js.map",
-    "runtime-main.js": "/the-online-music-store/static/js/runtime-main.2343b38c.js",
-    "runtime-main.js.map": "/the-online-music-store/static/js/runtime-main.2343b38c.js.map",
+    "main.js": "/the-online-music-store/static/js/main.de5e2e05.chunk.js",
+    "main.js.map": "/the-online-music-store/static/js/main.de5e2e05.chunk.js.map",
+    "runtime-main.js": "/the-online-music-store/static/js/runtime-main.3ec85bee.js",
+    "runtime-main.js.map": "/the-online-music-store/static/js/runtime-main.3ec85bee.js.map",
     "static/css/2.fabbef47.chunk.css": "/the-online-music-store/static/css/2.fabbef47.chunk.css",
-    "static/js/2.8fcf69c6.chunk.js": "/the-online-music-store/static/js/2.8fcf69c6.chunk.js",
-    "static/js/2.8fcf69c6.chunk.js.map": "/the-online-music-store/static/js/2.8fcf69c6.chunk.js.map",
-    "static/js/3.fae45dc7.chunk.js": "/the-online-music-store/static/js/3.fae45dc7.chunk.js",
-    "static/js/3.fae45dc7.chunk.js.map": "/the-online-music-store/static/js/3.fae45dc7.chunk.js.map",
+    "static/js/2.ac21900b.chunk.js": "/the-online-music-store/static/js/2.ac21900b.chunk.js",
+    "static/js/2.ac21900b.chunk.js.map": "/the-online-music-store/static/js/2.ac21900b.chunk.js.map",
+    "static/js/3.f34c72fe.chunk.js": "/the-online-music-store/static/js/3.f34c72fe.chunk.js",
+    "static/js/3.f34c72fe.chunk.js.map": "/the-online-music-store/static/js/3.f34c72fe.chunk.js.map",
     "index.html": "/the-online-music-store/index.html",
     "static/css/2.fabbef47.chunk.css.map": "/the-online-music-store/static/css/2.fabbef47.chunk.css.map",
     "static/css/main.45a4f969.chunk.css.map": "/the-online-music-store/static/css/main.45a4f969.chunk.css.map",
-    "static/js/2.8fcf69c6.chunk.js.LICENSE.txt": "/the-online-music-store/static/js/2.8fcf69c6.chunk.js.LICENSE.txt"
+    "static/js/2.ac21900b.chunk.js.LICENSE.txt": "/the-online-music-store/static/js/2.ac21900b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.2343b38c.js",
+    "static/js/runtime-main.3ec85bee.js",
     "static/css/2.fabbef47.chunk.css",
-    "static/js/2.8fcf69c6.chunk.js",
+    "static/js/2.ac21900b.chunk.js",
     "static/css/main.45a4f969.chunk.css",
-    "static/js/main.60170515.chunk.js"
+    "static/js/main.de5e2e05.chunk.js"
   ]
 }
