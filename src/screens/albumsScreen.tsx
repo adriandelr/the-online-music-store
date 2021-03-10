@@ -8,16 +8,11 @@ export interface AlbumsScreenProps {
   albums: any;
   isTopTen: boolean;
   showButtons: boolean;
-  updateCartData: any;
+  cartData: any;
 }
 
 const AlbumsScreen: React.SFC<AlbumsScreenProps> = (props) => {
-  const {
-    albums,
-    isTopTen,
-    showButtons,
-    updateCartData: updateCartData,
-  } = props;
+  const { albums, isTopTen, showButtons, cartData: cartData } = props;
 
   return (
     <div className="p-5">
@@ -29,7 +24,7 @@ const AlbumsScreen: React.SFC<AlbumsScreenProps> = (props) => {
             album={album}
             song={album.songs}
             showButtons={showButtons}
-            updateCartData={updateCartData}
+            cartData={cartData}
           />
           <Songs
             albums={albums}

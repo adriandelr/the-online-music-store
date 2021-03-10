@@ -1,5 +1,6 @@
 import React from "react";
 import { updateAlbum } from "../firebase/albumService";
+import Swal from "sweetalert2";
 
 import { FaCompactDisc, FaCartPlus } from "react-icons/fa";
 
@@ -9,7 +10,7 @@ export interface AlbumProps {
   artist: string;
   isTopTen?: boolean;
   showButtons: boolean;
-  updateCartData: any;
+  cartData: any;
 }
 
 export interface AlbumState {}
@@ -17,14 +18,7 @@ export interface AlbumState {}
 class Album extends React.Component<AlbumProps, AlbumState> {
   //   state = { : 0 };
   render() {
-    const {
-      album,
-      song,
-      artist,
-      isTopTen,
-      showButtons,
-      updateCartData: updateCartData,
-    } = this.props;
+    const { album, song, artist, isTopTen, showButtons, cartData } = this.props;
 
     return (
       <li
@@ -49,7 +43,12 @@ class Album extends React.Component<AlbumProps, AlbumState> {
                 album["onCartCount"] -= 1;
               });
               this.setState({});
-              updateCartData();
+              cartData.updateCartData();
+              Swal.fire(
+                `${album.albumName}`,
+                "Album added to cart!",
+                "success"
+              );
             }}
           >
             {!isTopTen && <FaCartPlus className={`text-dark mr-2`} />}

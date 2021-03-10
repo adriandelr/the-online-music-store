@@ -7,6 +7,7 @@ import {
   NavLink,
   Redirect,
 } from "react-router-dom";
+import Swal from "sweetalert2";
 
 import HomeScreen from "../screens/homeScreen";
 import AlbumsScreen from "../screens/albumsScreen";
@@ -22,30 +23,34 @@ export interface NavProps {
 export interface NavState {}
 
 class Nav extends React.Component<NavProps, NavState> {
-  state = { addedToCartAlbums: [], totalCartItems: 0, totalCartPrice: 0 };
+  state = {
+    addedToCartAlbums: [],
+    totalCartItems: 0,
+    totalCartPrice: 0,
+    updateCartData: () => {
+      let addedToCartAlbums = _.filter(
+        this.albums,
+        (album) => album.onCartCount > 0
+      );
+      _.forEach(addedToCartAlbums, (album) => {
+        album["totalPrice"] = album.onCartCount * album.albumPrice;
+      });
+      this.setState({
+        addedToCartAlbums: addedToCartAlbums,
+        totalCartItems: _.sumBy(addedToCartAlbums, "onCartCount"),
+        totalCartPrice: _.sumBy(addedToCartAlbums, "totalPrice"),
+      });
+    },
+  };
   albums = this.props.albums;
 
   componentDidMount() {
-    this.updateCartData();
+    this.state.updateCartData();
   }
-
-  updateCartData = () => {
-    let addedToCartAlbums = _.filter(
-      this.albums,
-      (album) => album.onCartCount > 0
-    );
-    _.forEach(addedToCartAlbums, (album) => {
-      album["totalPrice"] = album.onCartCount * album.albumPrice;
-    });
-    this.setState({
-      addedToCartAlbums: addedToCartAlbums,
-      totalCartItems: _.sumBy(addedToCartAlbums, "onCartCount"),
-      totalCartPrice: _.sumBy(addedToCartAlbums, "totalPrice"),
-    });
-  };
 
   render() {
     const { albums } = this.props;
+
     return (
       <HashRouter>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -83,13 +88,6 @@ class Nav extends React.Component<NavProps, NavState> {
                 Albums
               </NavLink>
               <NavLink
-                to="/the-online-music-store/purchase"
-                activeClassName="text-info"
-                className="nav-item nav-link text-decoration-none"
-              >
-                Purchase
-              </NavLink>
-              <NavLink
                 to="/the-online-music-store/cart"
                 activeClassName="text-info"
                 className="nav-item nav-link text-decoration-none"
@@ -99,20 +97,51 @@ class Nav extends React.Component<NavProps, NavState> {
                   {this.state.totalCartItems}
                 </span>
               </NavLink>
+              <NavLink
+                to="/the-online-music-store/purchase"
+                activeClassName="text-info"
+                className="nav-item nav-link text-decoration-none"
+              >
+                Purchase
+              </NavLink>
               <a
                 className="reset-btn nav-item nav-link text-decoration-none text-muted position-absolute mr-5"
                 role="button"
                 onClick={() => {
-                  if (
-                    window.confirm(
-                      "Reset Firestore Database?\nThese includes play, cart, and purchase counters.\n\nPage will reload shortly."
-                    )
-                  ) {
-                    initAlbums();
-                    setTimeout(() => {
-                      window.location.reload();
-                    }, 1000);
-                  }
+                  Swal.fire({
+                    title:
+                      "Reset Firestore Database?\nThese includes play, cart, and purchase counters.\n\nPage will reload shortly.",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: `Randomize`,
+                    denyButtonText: `Clear`,
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      initAlbums(true);
+                      Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Reseting data with random values :)",
+                        showConfirmButton: false,
+                        timer: 1700,
+                      });
+                      setTimeout(() => {
+                        window.location.reload();
+                      }, 2300);
+                    } else if (result.isDenied) {
+                      initAlbums();
+                      Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Clearing store data :)",
+                        showConfirmButton: false,
+                        timer: 1700,
+                      });
+                      setTimeout(() => {
+                        window.location.reload();
+                      }, 2300);
+                    }
+                  });
                 }}
               >
                 Reset Data
@@ -121,11 +150,7 @@ class Nav extends React.Component<NavProps, NavState> {
           </div>
         </nav>
         <Route exact path="/the-online-music-store/cart">
-          <CartScreen
-            cartData={this.state}
-            updateCartData={this.updateCartData}
-            albums={albums}
-          />
+          <CartScreen cartData={this.state} albums={albums} />
         </Route>
         <Route exact path="/the-online-music-store/purchase">
           <PurchaseScreen albums={albums} />
@@ -135,7 +160,7 @@ class Nav extends React.Component<NavProps, NavState> {
             albums={albums}
             isTopTen={false}
             showButtons={true}
-            updateCartData={this.updateCartData}
+            cartData={this.state}
           />
         </Route>
         <Route exact path="/the-online-music-store/home">

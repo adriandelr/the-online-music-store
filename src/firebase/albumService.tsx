@@ -1,23 +1,31 @@
+import _ from "lodash";
 import albumData from "../constants/albumsData";
 import Firebase from "./Firebase";
 
 const db = Firebase.firestore();
 const query = db.collection("albums");
 
-const addAlbums = () => {
+const addAlbums = (isRandomData?: boolean) => {
   console.log("---- Adding Albums");
-  albumData.forEach((album: any, aIndex: number) => {
+  _.forEach(albumData, (album: any, aIndex: number) => {
     album["albumRef"] = db.doc("albumId/" + (aIndex + 1));
+    if (isRandomData) {
+      album["onCartCount"] = _.random(15);
+      album["purchasedCount"] = _.random(10);
+      album["albumPrice"] = _.random(9, 21);
+    }
     album.songs.forEach((song: any, sIndex: number) => {
       song["songId"] = sIndex + 1;
       song["albumId"] = aIndex + 1;
+      if (isRandomData) song["playCount"] = _.random(7, 337);
     });
     query
       .doc(album.albumId)
       .set(album)
       .then(() => {
         console.log("Document written with ID: ", album.albumId);
-        if (albumData.length - 1 == aIndex) console.log("-- Done Add");
+        if (albumData.length - 1 == aIndex)
+          console.log("-- Done Retreiving Albums");
       })
       .catch((error: any) => {
         console.error("Error adding document: ", error);
@@ -25,7 +33,11 @@ const addAlbums = () => {
   });
 };
 
-const clearAlbums = async (path: string, isInit: boolean) => {
+const clearAlbums = async (
+  path: string,
+  isInit: boolean,
+  isRandomData?: boolean
+) => {
   console.log("---- Deleting Albums");
   const snapshot = await query.get();
   const batch = db.batch();
@@ -37,20 +49,20 @@ const clearAlbums = async (path: string, isInit: boolean) => {
     .commit()
     .then(() => {
       console.log("-- Done Delete");
-      if (isInit) addAlbums();
+      if (isInit) addAlbums(isRandomData);
     })
     .catch((error: any) => {
       console.error("Error deleting document: ", error);
     });
 };
 
-const initAlbums = () => {
+const initAlbums = (isRandomData?: boolean) => {
   console.log("---- Initializing Albums");
   query.get().then((snapshot) => {
     if (snapshot.empty) {
       addAlbums();
     } else {
-      clearAlbums("albums", true);
+      clearAlbums("albums", true, isRandomData);
     }
   });
 };

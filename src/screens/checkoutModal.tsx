@@ -1,25 +1,26 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
 import _ from "lodash";
+import Swal from "sweetalert2";
 
 import { updateAlbums } from "../firebase/albumService";
 
 export interface CheckoutModalProps {
-  albums: any;
-  totalPrice: number;
+  cartData: any;
   closeModal: any;
 }
 
 const CheckoutModal: React.SFC<CheckoutModalProps> = (props) => {
-  const { albums, totalPrice, closeModal } = props;
+  const { cartData, closeModal } = props;
   let history = useHistory();
 
   const purchaseAlbums = () => {
-    _.forEach(albums, (album) => {
+    _.forEach(cartData.addedToCartAlbums, (album) => {
       album["purchasedCount"] += album["onCartCount"];
       album["onCartCount"] = 0;
     });
-    updateAlbums(albums);
+    updateAlbums(cartData.addedToCartAlbums);
+    cartData.updateCartData();
   };
 
   return (
@@ -29,7 +30,7 @@ const CheckoutModal: React.SFC<CheckoutModalProps> = (props) => {
         <h4 className="list-group-item d-flex flex-row justify-content-between bg-white text-dark">
           Checkout
           <span className="text-secondary font-weight-bold">
-            Total (${totalPrice})
+            Total (${cartData.totalPrice})
           </span>
         </h4>
         <div className="checkout-table">
@@ -43,12 +44,14 @@ const CheckoutModal: React.SFC<CheckoutModalProps> = (props) => {
                 <th scope="col">Price</th>
               </tr>
             </thead>
-            {albums.length > 0 && (
+            {cartData.addedToCartAlbums.length > 0 && (
               <tbody>
-                {albums.map((album: any, index: number) => (
+                {cartData.addedToCartAlbums.map((album: any, index: number) => (
                   <tr key={album.albumId}>
-                    <th scope="row">{index}</th>
-                    <td>{album.albumName}</td>
+                    <th scope="row" className="font-weight-normal">
+                      {index}
+                    </th>
+                    <td className="font-weight-bold">{album.albumName}</td>
                     <td>{album.albumArtist}</td>
                     <td>{album.onCartCount}</td>
                     <td>${album.albumPrice}</td>
@@ -73,9 +76,26 @@ const CheckoutModal: React.SFC<CheckoutModalProps> = (props) => {
               className="text-light font-weight-bold bg-dark m-3 p-2"
               role="button"
               onClick={() => {
-                purchaseAlbums();
-                closeModal();
-                history.push("/the-online-music-store/purchase");
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: "Placing your order.",
+                  icon: "question",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, place it!",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    purchaseAlbums();
+                    closeModal();
+                    history.push("/the-online-music-store/purchase");
+                    Swal.fire(
+                      "Order succesful!",
+                      "You are redirected to Purchase page.",
+                      "success"
+                    );
+                  }
+                });
               }}
             >
               Place Order

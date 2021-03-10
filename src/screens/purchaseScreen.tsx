@@ -35,8 +35,10 @@ const PurchaseScreen: React.SFC<PurchaseScreenProps> = (props) => {
           <tbody>
             {purchasedAlbums.map((album: any, index: number) => (
               <tr key={album.albumId}>
-                <th scope="row">{index}</th>
-                <td>{album.albumName}</td>
+                <th scope="row" className="font-weight-normal">
+                  {index}
+                </th>
+                <td className="font-weight-bold">{album.albumName}</td>
                 <td>{album.albumArtist}</td>
                 <td>{album.purchasedCount}</td>
                 <td>${album.albumPrice}</td>

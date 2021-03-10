@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import _ from "lodash";
+import Swal from "sweetalert2";
 
 import { updateAlbum } from "../firebase/albumService";
 import CheckoutModal from "./checkoutModal";
@@ -7,13 +8,12 @@ import CheckoutModal from "./checkoutModal";
 export interface CartScreenProps {
   albums: any;
   cartData: any;
-  updateCartData: any;
 }
 
 const CartScreen: React.SFC<CartScreenProps> = (props) => {
   const [albums, setAlbums] = useState(props.albums);
   const [showModal, setShowModal] = useState(false);
-  const { cartData, updateCartData } = props;
+  const { cartData } = props;
 
   const closeModal = () => {
     setShowModal(false);
@@ -22,11 +22,7 @@ const CartScreen: React.SFC<CartScreenProps> = (props) => {
   return (
     <React.Fragment>
       {showModal && cartData.addedToCartAlbums.length > 0 && (
-        <CheckoutModal
-          albums={cartData.addedToCartAlbums}
-          totalPrice={cartData.totalCartPrice}
-          closeModal={closeModal}
-        />
+        <CheckoutModal cartData={cartData} closeModal={closeModal} />
       )}
       <div className="m-5">
         <h3 className="text-dark mb-5">My Cart</h3>
@@ -45,8 +41,10 @@ const CartScreen: React.SFC<CartScreenProps> = (props) => {
             <tbody>
               {cartData.addedToCartAlbums.map((album: any, index: number) => (
                 <tr key={album.albumId}>
-                  <th scope="row">{index}</th>
-                  <td>{album.albumName}</td>
+                  <th scope="row" className="font-weight-normal">
+                    {index}
+                  </th>
+                  <td className="font-weight-bold">{album.albumName}</td>
                   <td>{album.albumArtist}</td>
                   <td>{album.onCartCount}</td>
                   <td>${album.albumPrice}</td>
@@ -59,7 +57,12 @@ const CartScreen: React.SFC<CartScreenProps> = (props) => {
                           album["onCartCount"] -= 1;
                         });
                         setAlbums(cartData.addedToCartAlbums);
-                        updateCartData();
+                        cartData.updateCartData();
+                        Swal.fire(
+                          `${album.albumName}`,
+                          "Album deleted from cart!",
+                          "error"
+                        );
                       }}
                     >
                       Remove
