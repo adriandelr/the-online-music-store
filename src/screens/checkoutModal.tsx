@@ -30,7 +30,7 @@ const CheckoutModal: React.SFC<CheckoutModalProps> = (props) => {
         <h4 className="list-group-item d-flex flex-row justify-content-between bg-white text-dark">
           Checkout
           <span className="text-secondary font-weight-bold">
-            Total (${cartData.totalPrice})
+            Total (${cartData.totalCartPrice})
           </span>
         </h4>
         <div className="checkout-table">
