@@ -6,7 +6,7 @@ The Online Music Store is a site where you can play, listen, and purchase top se
 
 ## Purpose
 
-This exercise showcases ReactJS features
+This exercise showcases ReactJS features, and logical approaches in developing the app.
 
 - Firebase/Firestore
 - Globalization/Scoping
