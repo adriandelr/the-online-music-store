@@ -16,6 +16,8 @@ const PurchaseScreen: React.SFC<PurchaseScreenProps> = (props) => {
 
   let totalPrice = _.sumBy(purchasedAlbums, "totalPrice");
 
+  purchasedAlbums = _.orderBy(purchasedAlbums, ["purchasedCount"], ["desc"]);
+
   return (
     <div className="m-5">
       <h3 className="text-dark mb-5">Purchased Albums</h3>
