@@ -44,9 +44,16 @@ class Album extends React.Component<AlbumProps, AlbumState> {
             }}
           >
             {!isTopTen && <FaCartPlus className={`text-dark mr-2`} />}
-            <span className="text-secondary initialism">
-              {album.purchasedCount}
-            </span>
+            {isTopTen && (
+              <span className="text-secondary initialism">
+                {album.purchasedCount}
+              </span>
+            )}
+            {!isTopTen && (
+              <span className="text-secondary initialism">
+                {album.onCartCount}
+              </span>
+            )}
             {showButtons && (
               <kbd className="text-dark bg-light ml-1">Add To Cart</kbd>
             )}
