@@ -70,7 +70,7 @@ const CheckoutModal: React.SFC<CheckoutModalProps> = (props) => {
               Back
             </kbd>
             <kbd
-              className="text-light bg-dark m-3 p-2"
+              className="text-light font-weight-bold bg-dark m-3 p-2"
               role="button"
               onClick={() => {
                 purchaseAlbums();

@@ -5,7 +5,7 @@ const albumData = [
     albumArtist: "The Script",
     onCartCount: 0,
     purchasedCount: 0,
-    albumPrice: 0,
+    albumPrice: 21,
     songs: [
       {
         title: "We Cry",
@@ -70,7 +70,7 @@ const albumData = [
     albumArtist: "The Script",
     onCartCount: 0,
     purchasedCount: 0,
-    albumPrice: 0,
+    albumPrice: 14,
     songs: [
       {
         title: "You Won't Feel A Thing",

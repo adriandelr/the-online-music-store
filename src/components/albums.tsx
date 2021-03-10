@@ -17,7 +17,12 @@ class Albums extends React.Component<AlbumsProps, AlbumsState> {
 
     return (
       <div className="text-left m-5">
-        {isTopTen && <h5>Top 10 Best Selling Albums</h5>}
+        {isTopTen && (
+          <div className="d-flex justify-content-between">
+            <h5 className="text-dark">Top 10 Best Selling Albums</h5>
+            <small className="text-secondary mt-2 mr-3">Bought</small>
+          </div>
+        )}
         <ul className="list-group">
           {albums.map((album: any) => (
             <Album

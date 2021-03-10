@@ -87,7 +87,7 @@ const CartScreen: React.SFC<CartScreenProps> = (props) => {
                 </td>
                 <td>
                   <kbd
-                    className="text-info bg-light ml-1"
+                    className="text-info font-weight-bold bg-light ml-1"
                     role="button"
                     onClick={() => {
                       setShowModal(true);

@@ -1,6 +1,7 @@
 import React from "react";
-import { FaRegPlayCircle } from "react-icons/fa";
 import { updateAlbum } from "../firebase/albumService";
+
+import { FaRegPlayCircle, FaPlayCircle } from "react-icons/fa";
 
 export interface SongProps {
   album: any;
@@ -21,23 +22,23 @@ class Song extends React.Component<SongProps, SongState> {
     this.state.playCount = song.playCount;
     return (
       <li
-        className={`${
-          isTopTen ? "list-group-item p-2 bg-light" : "m-1"
-        } d-flex flex-row justify-content-between`}
+        className={`d-flex flex-row justify-content-between ${
+          isTopTen ? "list-group-item px-3 p-2 bg-light" : "m-1"
+        }`}
       >
         <span className="p-0">
+          <FaRegPlayCircle className={`text-muted mr-2`} />
           {artist}
           {" - "}
           {song.title}
         </span>
         <span className="p-0">
-          <FaRegPlayCircle className="mr-2" />
-          <span className="text-secondary initialism">
-            ({this.state.playCount})
+          <span className={`text-secondary initialism`}>
+            {this.state.playCount}
           </span>
           {showButtons && (
             <kbd
-              className="text-dark bg-light ml-1"
+              className="bg-light ml-1"
               role="button"
               onClick={() => {
                 updateAlbum(song.songId, album, true).catch(() => {
@@ -46,7 +47,7 @@ class Song extends React.Component<SongProps, SongState> {
                 this.setState({});
               }}
             >
-              Play
+              <FaPlayCircle className={`text-dark opacity-2h5`} />
             </kbd>
           )}
         </span>

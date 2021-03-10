@@ -17,7 +17,12 @@ class Songs extends React.Component<SongsProps, SongsState> {
 
     return (
       <div className={`text-left ${isTopTen ? "m-5" : "m-4"}`}>
-        {isTopTen && <h5>Top 10 Most Played Songs</h5>}
+        {isTopTen && (
+          <div className="d-flex justify-content-between">
+            <h5 className="text-dark">Top 10 Most Played Songs</h5>
+            <small className="text-secondary mt-2 mr-3">Plays</small>
+          </div>
+        )}
         <ul className="list-group">
           {songs.map((song: any) => (
             <Song
